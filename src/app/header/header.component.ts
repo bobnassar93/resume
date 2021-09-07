@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   hideSideBar = (): void => {
+    if (document.querySelector('body')!.classList.contains('mobile-nav-active'))
     document.querySelector('body')!.classList.toggle('mobile-nav-active');
     this.navbarToggle.classList.toggle('bi-list');
     this.navbarToggle.classList.toggle('bi-x');
