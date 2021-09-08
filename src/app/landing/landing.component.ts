@@ -16,8 +16,7 @@ export class LandingComponent implements OnInit {
 
     this.navbarToggle = document.querySelector('.mobile-nav-toggle') as HTMLElement;
 
-   
-   // Back to top button
+    // Back to top button
     this.backtotop = document.querySelector('.back-to-top') as HTMLButtonElement;
 
     if (this.backtotop) {
