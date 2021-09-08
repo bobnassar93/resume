@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
    */
   @HostListener('document:scroll')
   navbarlinksActive = () => {
-    let position = window.scrollY + 200
+    let position = window.scrollY + 330
     this.navbarlinks.forEach((navbarlink: any) => {
       if (!navbarlink.hash) return
       let section = document.querySelector(navbarlink.hash) as HTMLAnchorElement;
@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
 
   hideSideBar = (): void => {
     if (document.querySelector('body')!.classList.contains('mobile-nav-active'))
-    document.querySelector('body')!.classList.toggle('mobile-nav-active');
+      document.querySelector('body')!.classList.toggle('mobile-nav-active');
     this.navbarToggle.classList.toggle('bi-list');
     this.navbarToggle.classList.toggle('bi-x');
   }
