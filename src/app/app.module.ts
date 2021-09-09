@@ -16,6 +16,7 @@ import { PortfolioComponent } from './main/portfolio/portfolio.component';
 import { MyServicesComponent } from './main/my-services/my-services.component';
 import { ContactComponent } from './main/contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FooterComponent } from './footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
