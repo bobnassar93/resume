@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact',
@@ -8,21 +10,83 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ContactComponent implements OnInit {
 
+  sending: boolean = false;
+  nameValidationMessage: string = '';
+  emailValidationMessage: string = '';
+  subjectValidationMessage: string = '';
+  messageValidationMessage: string = '';
+
+  name = new FormControl('', Validators.required);
+  email = new FormControl('', [Validators.required, Validators.email]);
+  subject = new FormControl('', Validators.required);
+  message = new FormControl('', Validators.required);
+
+  canSend: boolean = false;
+
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
   }
 
+
   sendMessage = (): void => {
+    this.validate();
+    if (this.canSend === false) {
+      return;
+    }
+    this.sending = true;
     this.http.post('https://node-webmailer.herokuapp.com/sendMail',
       {
-        from: 'bobnassar@gmail.com',
-        subject: 'Test Subject',
-        message: 'Test Message'
-      }).subscribe(res => {
-        console.log(res);
+        from: this.email.value,
+        subject: this.subject.value,
+        message: this.message.value,
+        name: this.name.value
+      }).subscribe((res: any) => {
+        this.toastr.success(res.Response);
+        this.canSend = false;
+        this.email.reset();
+        this.name.reset();
+        this.subject.reset();
+        this.message.reset();
+        this.sending = false;
       });
+  }
+
+  validate = (): void => {
+    this.canSend = false;
+    if (this.email.hasError('required')) {
+      this.canSend = false;
+      this.emailValidationMessage = 'You must enter your email';
+    } else {
+      this.emailValidationMessage = '';
+      this.canSend = true;
+    }
+    if (this.email.hasError('email')) {
+      this.canSend = false;
+      this.emailValidationMessage = 'Not a valid email';
+    } else if (this.name.hasError('required')) {
+      this.canSend = false;
+      this.nameValidationMessage = 'You must enter your fullname';
+    } else {
+      this.nameValidationMessage = '';
+      this.canSend = true;
+    }
+    if (this.subject.hasError('required')) {
+      this.canSend = false;
+      this.subjectValidationMessage = 'You must enter a subject';
+    } else {
+      this.subjectValidationMessage = '';
+      this.canSend = true;
+    }
+    if (this.message.hasError('required')) {
+      this.canSend = false;
+      this.messageValidationMessage = 'You must enter a message';
+    } else {
+      this.messageValidationMessage = '';
+      this.canSend = true;
+    }
   }
 }
