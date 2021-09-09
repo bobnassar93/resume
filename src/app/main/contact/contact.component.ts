@@ -16,13 +16,13 @@ export class ContactComponent implements OnInit {
   }
 
   sendMessage = (): void => {
-    this.http.post('http://localhost:5000/sendMail',
-    {
-      from: 'bobnassar@gmail.com',
-      subject: 'Test Subject',
-      message: 'Test Message'
-    }).subscribe(res => {
-      console.log(res);
-    });
+    this.http.post('https://node-webmailer.herokuapp.com/sendMail',
+      {
+        from: 'bobnassar@gmail.com',
+        subject: 'Test Subject',
+        message: 'Test Message'
+      }).subscribe(res => {
+        console.log(res);
+      });
   }
 }
