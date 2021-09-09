@@ -12,9 +12,9 @@ export class HeroComponent implements OnInit {
 
   ngOnInit(): void {
     new Typed('.typed', {
-      strings: ['a Full Stack Web Developer', 'a Freelancer', 'a Remote support IT'],
+      strings: ['a Full Stack Web Developer', 'a Freelancer'],
       loop: true,
-      typeSpeed: 100,
+      typeSpeed: 75,
       backSpeed: 50,
       backDelay: 2000
     });
