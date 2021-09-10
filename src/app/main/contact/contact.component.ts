@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -16,6 +17,17 @@ export class ContactComponent implements OnInit {
   subjectValidationMessage: string = '';
   messageValidationMessage: string = '';
 
+  host: string = 'smtp.gmail.com';
+  port: number = 465;
+  secure: boolean = true;
+  auth: {
+    user: string,
+    pass: string
+  } = {
+      user: 'bobnassar93@gmail.com',
+      pass: ''
+    };
+
   name = new FormControl('', Validators.required);
   email = new FormControl('', [Validators.required, Validators.email]);
   subject = new FormControl('', Validators.required);
@@ -25,7 +37,7 @@ export class ContactComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +55,14 @@ export class ContactComponent implements OnInit {
         from: this.email.value,
         subject: this.subject.value,
         message: this.message.value,
-        name: this.name.value
+        name: this.name.value,
+        host: this.host,
+        port: this.port,
+        secure: this.secure,
+        auth: {
+          user: this.auth.user,
+          pass: environment.authPass
+        }
       }).subscribe((res: any) => {
         this.toastr.success(res.Response);
         this.canSend = false;
