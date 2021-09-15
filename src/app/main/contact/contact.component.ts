@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -58,11 +57,7 @@ export class ContactComponent implements OnInit {
         name: this.name.value,
         host: this.host,
         port: this.port,
-        secure: this.secure,
-        auth: {
-          user: this.auth.user,
-          pass: environment.authPass
-        }
+        secure: this.secure
       }).subscribe((res: any) => {
         this.toastr.success(res.Response);
         this.canSend = false;
