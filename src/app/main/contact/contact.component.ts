@@ -70,37 +70,31 @@ export class ContactComponent implements OnInit {
   }
 
   validate = (): void => {
-    this.canSend = false;
+    this.emailValidationMessage = '';
+    this.nameValidationMessage = '';
+    this.subjectValidationMessage = '';
+    this.messageValidationMessage = '';
+    this.canSend = true;
+
     if (this.email.hasError('required')) {
       this.canSend = false;
       this.emailValidationMessage = 'You must enter your email';
-    } else {
-      this.emailValidationMessage = '';
-      this.canSend = true;
     }
     if (this.email.hasError('email')) {
       this.canSend = false;
       this.emailValidationMessage = 'Not a valid email';
-    } else if (this.name.hasError('required')) {
+    }
+    if (this.name.hasError('required')) {
       this.canSend = false;
       this.nameValidationMessage = 'You must enter your fullname';
-    } else {
-      this.nameValidationMessage = '';
-      this.canSend = true;
     }
     if (this.subject.hasError('required')) {
       this.canSend = false;
       this.subjectValidationMessage = 'You must enter a subject';
-    } else {
-      this.subjectValidationMessage = '';
-      this.canSend = true;
     }
     if (this.message.hasError('required')) {
       this.canSend = false;
       this.messageValidationMessage = 'You must enter a message';
-    } else {
-      this.messageValidationMessage = '';
-      this.canSend = true;
     }
   }
 }
