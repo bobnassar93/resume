@@ -38,12 +38,12 @@
         <div class="email-form">
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="name">Your Name</label>
+              <label for="name">Full name</label>
               <input type="text" name="name" class="form-control" id="name" [formControl]="name" required>
               <span class="text-danger" *ngIf="nameValidationMessage !== ''">{{nameValidationMessage}}</span>
             </div>
             <div class="form-group col-md-6">
-              <label for="name">Your Email</label>
+              <label for="name">Email</label>
               <input type="email" class="form-control" name="email" id="email" [formControl]="email" required>
               <span class="text-danger" *ngIf="emailValidationMessage !== ''">{{emailValidationMessage}}</span>
             </div>

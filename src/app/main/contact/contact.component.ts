@@ -86,7 +86,7 @@ export class ContactComponent implements OnInit {
     }
     if (this.name.hasError('required')) {
       this.canSend = false;
-      this.nameValidationMessage = 'You must enter your fullname';
+      this.nameValidationMessage = 'You must enter your full name';
     }
     if (this.subject.hasError('required')) {
       this.canSend = false;
